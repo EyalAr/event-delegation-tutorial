@@ -20,4 +20,4 @@ function addHelloDiv(){
 
 We see that, although the new element is successfully added, nothing happens when we click it. This makes sense, as we didn't add any event to the new element. Let's do it in the next step.
 
-__Continue to [step-4](./step-4).__
+__Continue to [step-4](../../tree/step-4).__
