@@ -1,53 +1,32 @@
 # Events Delegation Interactive Repo
 
-## Step 9 - A Generic Event Delegation Framework
+## Step 10 - A Generic Event Delegation Framework
 
-Our goal is to build a framework which allows us to:
+Let's build the `on` method of our `MyQuery` object. This method delegates an event of a certain type to the `MyQuery` object; with a handler to be called when the event target matches a selector. It needs to do 2 simple things:
 
-0. Select elements
-0. Delegate events to selected elements
-
-(Just like jQuery works)
-
-Let's define a jQuery-like syntax of what we want to do:
+0. Initialize a global handler on the parent element for the event type when it's called for the first time.
+0. Add an event handler to be called when the target matches the selector.
 
 ```Javascript
-var foo = $("#foo"),
-    bar = $("#bar");
+MyQuery.prototype.on = function(type, selector, handler){
 
-foo.on('click', 'div.hello', helloOnClick);
-bar.on('click', 'div.world', worldOnClick);
-```
+    if (!this.eventHandlers[type]){
+        initGlobalHandler.call(this, type);
+        this.eventHandlers[type] = [];
+    }
 
-First, we select an element (`$("#foo")` selects the `#foo` DIV). Then, we add a delegated event to this element. `foo.on('click', 'div.hello', helloOnClick)` adds a click event to every child DIV element with class `.hello` and delegates it to `#foo`.
+    this.eventHandlers[type].push({
+        selector: selector,
+        handler: handler
+    });
 
-The basis of our framework will be an object which represents selected DOM elements. Let's define its constructor:
-
-```Javascript
-// constructor
-function MyQuery(selector){
-    this.els = document.querySelectorAll(selector);
-}
-```
-
-This object should have an `on` method as described above:
-
-```Javascript
-MyQuery.prototype.on = function(){
-    /* ... */
 };
-```
 
-We will implement this method later.
-
-Finally, we want to have the `$` function create this kind of object for us:
-
-```Javascript
-function $(selector){
-    return new MyQuery(selector);
+function initGlobalHandler(type){
+    /* ... */
 }
 ```
 
-In the next steps we will build the `on` method.
+In the next step we will implement the `initGlobalHandler` function, which actually does the heavy lifting of handling delegated events.
 
-__Continue to [step-10](../../tree/step-10).__
+__Continue to [step-11](../../tree/step-11).__
