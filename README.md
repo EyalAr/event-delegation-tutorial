@@ -1,32 +1,18 @@
 # Events Delegation Interactive Repo
 
-## Step 6 - Delegating events to the parent and filtering the target
+## Step 7 - Delegating events to the parent and filtering the target
 
-We only want the `"Hello"` and `"World"` divs to beep on clicks, and not any other element inside `#foo` and `#bar`.
+A more scalable solution would allow us to delegate events to some parent element without us having to modify our handlers.
 
-Let's modify our event handlers to examine the target of the click event, and play the beep only for the desired target.
+Let's propose a function `delegateEvent` which would be used as follows:
 
 ```Javascript
-function helloOnClick(e){ 
-    if (e.target.matches("div#foo div.hello")){
-        beep();
-    }
-}
-
-function worldOnClick(e) {
-    if (e.target.matches("div#bar div.world")){
-        beep();
-        setTimeout(beep, 200);
-    }
-}
+delegateEvent(foo, 'click', 'div.hello', helloOnClick);
+delegateEvent(bar, 'click', 'div.world', worldOnClick);
 ```
 
-`"div#foo div.hello"` tells our `helloOnClick` handler to beep only when the target is a DIV element with a `".hello"` class inside the `#foo` container. Similarly the `worldOnClick` handler will beep only when the target is a DIV element with a `".world"` class inside the `#bar` container.
+The first line delegates a `click` event to the `foo` element and limits it only to clicks on DIV elements with a `.hello` class. Similarly, the second line delegates `click` events on DIV elements with a `.world` class to the `bar` element.
 
-![preview](assets/6.gif)
+Let's implement this function in the next step.
 
-Although now we get what we want, this solution is not very scalable. What if we add other types of elements into our `#foo` and `#bar` containers with different events? Then we would have to check the target of the event for each of those types. Again, this is a lot of manual work.
-
-In the next steps we will see how we can build a more generic event delegation solution.
-
-__Continue to [step-7](../../tree/step-7).__
+__Continue to [step-8](../../tree/step-8).__
