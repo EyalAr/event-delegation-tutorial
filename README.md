@@ -29,4 +29,4 @@ Managing events for each element in our page is a hassle. If we have thousands o
 
 In the next few steps we will see a different, easier, approach.
 
-__Continue to [step-5](./step-5).__
+__Continue to [step-5](../../tree/step-5).__
