@@ -1,44 +1,53 @@
 # Events Delegation Interactive Repo
 
-## Step 8 - A Generic Event Delegation Solution
+## Step 9 - A Generic Event Delegation Framework
 
-The `delegateEvent` function should:
+Our goal is to build a framework which allows us to:
 
-0. Add an event to the parent element.
-0. Every time the event occurs, check the target and see if it matches a desired child element.
-0. Run the handler if such an element is found.
+0. Select elements
+0. Delegate events to selected elements
+
+(Just like jQuery works)
+
+Let's define a jQuery-like syntax of what we want to do:
 
 ```Javascript
-function delegateEvent(parent, type, selector, handler){
-    parent.addEventListener(type, function(e){
-        var target = e.target,
-            els = parent.querySelectorAll(selector),
-            i;
-        for (i = 0; i < els.length; i++){
-            if (els[i] === target){
-                handler(e);
-                break;
-            }
-        }
-    });
+var foo = $("#foo"),
+    bar = $("#bar");
+
+foo.on('click', 'div.hello', helloOnClick);
+bar.on('click', 'div.world', worldOnClick);
+```
+
+First, we select an element (`$("#foo")` selects the `#foo` DIV). Then, we add a delegated event to this element. `foo.on('click', 'div.hello', helloOnClick)` adds a click event to every child DIV element with class `.hello` and delegates it to `#foo`.
+
+The basis of our framework will be an object which represents selected DOM elements. Let's define its constructor:
+
+```Javascript
+// constructor
+function MyQuery(selector){
+    this.els = document.querySelectorAll(selector);
 }
 ```
 
-Let's try to use it:
+This object should have an `on` method as described above:
 
 ```Javascript
-delegateEvent(foo, 'click', 'div.hello', helloOnClick);
-delegateEvent(bar, 'click', 'div.world', worldOnClick);
+MyQuery.prototype.on = function(){
+    /* ... */
+};
 ```
 
-![preview](assets/8.gif)
+We will implement this method later.
 
-It works! Now we have a generic function with which we can delegate any event to any parent element. That's great. But what if our parent element has many types of children elements? And what if each type requires a different handler? This means we have to add all those event handlers to our single parent element, which may not be very efficient.
+Finally, we want to have the `$` function create this kind of object for us:
 
-What if we could add just one global handler to our parent element for every event type? One global handler which will manage delegation of all events of a certain type.
+```Javascript
+function $(selector){
+    return new MyQuery(selector);
+}
+```
 
-We will have one handler for `click` events, one handler for `mouseenter` events, etc.
+In the next steps we will build the `on` method.
 
-Let's build the framework for this in the next few steps.
-
-__Continue to [step-9](../../tree/step-9).__
+__Continue to [step-10](../../tree/step-10).__

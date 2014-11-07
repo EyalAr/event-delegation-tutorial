@@ -1,10 +1,10 @@
 'use strict';
 
-var foo = document.getElementById("foo"),
-    bar = document.getElementById("bar");
+var foo = $("#foo"),
+    bar = $("#bar");
 
-delegateEvent(foo, 'click', 'div.hello', helloOnClick);
-delegateEvent(bar, 'click', 'div.world', worldOnClick);
+foo.on('click', 'div.hello', helloOnClick);
+bar.on('click', 'div.world', worldOnClick);
 
 function helloOnClick(e){
     beep();
