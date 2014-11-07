@@ -25,4 +25,4 @@ divs to respond to clicks, and not all the elements inside `#foo` and `#bar`.
 
 In the next step we will propose a naive way to make this distinction.
 
-__Continue to [step-6](./step-6).__
+__Continue to [step-6](../../tree/step-6).__
