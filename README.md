@@ -27,6 +27,7 @@ The basis of our framework will be an object which represents selected DOM eleme
 // constructor
 function MyQuery(selector){
     this.els = document.querySelectorAll(selector);
+    this.eventHandlers = {};
 }
 ```
 
