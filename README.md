@@ -12,7 +12,7 @@ var foo = document.getElementById("foo"),
     bar = document.getElementById("bar");
 
 foo.addEventListener('click', helloOnClick);
-foo.addEventListener('click', worldOnClick);
+bar.addEventListener('click', worldOnClick);
 ```
 
 Now every time we click inside one of the parent divs, `#foo` and `#bar`,
