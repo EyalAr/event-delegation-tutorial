@@ -1,0 +1,19 @@
+div, table, tr, td {
+    padding: 15px;
+    margin: 5px;
+    border: 5px solid gray;
+    font-size: 1.2em;
+    font-family: monospace;
+}
+div {
+    background: #a4d788;
+}
+table {
+    background: #d7d088;
+}
+tr {
+    background: #88d7d0;
+}
+td {
+    background: #9088d7;
+}
