@@ -1,41 +1,23 @@
 # Events Delegation Interactive Repo
 
-## Step 2 - Adding Simple DOM Events
+## Step 3 - Manually Adding DOM Elements
 
-The first step in adding DOM events is finding the DOM elements we need:
-
-```Javascript
-var helloDiv = document.querySelectorAll("div#foo div")[0],
-    worldDiv = document.querySelectorAll("div#bar div")[0];
-```
-
-Then adding the events is as simple as:
+Let's write a function to manually add a new `"Hello"` DIV element:
 
 ```Javascript
-helloDiv.addEventListener('click', helloOnClick);
-worldDiv.addEventListener('click', worldOnClick);
-```
+function addHelloDiv(){
+    var fooTr = document.querySelectorAll("div#foo table tr")[0],
+        td = document.createElement("td"),
+        div = document.createElement("div");
 
-When `helloDiv` is clicked, we should hear one beep:
-
-```Javascript
-function helloOnClick(){ 
-    beep(); 
+    div.innerHTML = "Hello";
+    td.appendChild(div);
+    fooTr.appendChild(td);
 }
 ```
 
-and When `worldDiv` is clicked, we should hear two beeps:
+![preview](assets/3.gif)
 
-```Javascript
-function worldOnClick(){ 
-    beep();
-    setTimeout(beep, 200);
-}
-```
+We see that, although the new element is successfully added, nothing happens when we click it. This makes sense, as we didn't add any event to the new element. Let's do it in the next step.
 
-![preview](assets/2.gif)
-
-That's great. Now let's see what happens when we manually add a new `"Hello"`
-DIV element.
-
-__Continue to [step-3](./step-3).__
+__Continue to [step-4](./step-4).__
