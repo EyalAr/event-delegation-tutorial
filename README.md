@@ -8,4 +8,4 @@
 0. Guide you, step-by-step, how to build a simple event delegation library,
    jQuery-style.
 
-Start at [step-1](../../step-1)
+Start at [step-1](../../tree/step-1)
