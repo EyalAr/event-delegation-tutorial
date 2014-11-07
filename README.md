@@ -1,12 +1,41 @@
 # Events Delegation Interactive Repo
 
-## Step 1 - Basic HTML
+## Step 2 - Adding Simple DOM Events
 
-We start by building a basic DOM structure which consists of several divs, tables and cells.
+The first step in adding DOM events is finding the DOM elements we need:
 
-![preview](assets/1.png)
+```Javascript
+var helloDiv = document.querySelectorAll("div#foo div")[0],
+    worldDiv = document.querySelectorAll("div#bar div")[0];
+```
 
-Let's add DOM events.  
-We want to add click events to each of the `"Hello"` and `"World"` elements. When we click `"Hello"` we should hear one beep, and when we click `"World"` we should hear 2 beeps.
+Then adding the events is as simple as:
 
-__Continue to [step-2](./step-2).__
+```Javascript
+helloDiv.addEventListener('click', helloOnClick);
+worldDiv.addEventListener('click', worldOnClick);
+```
+
+When `helloDiv` is clicked, we should hear one beep:
+
+```Javascript
+function helloOnClick(){ 
+    beep(); 
+}
+```
+
+and When `worldDiv` is clicked, we should hear two beeps:
+
+```Javascript
+function worldOnClick(){ 
+    beep();
+    setTimeout(beep, 200);
+}
+```
+
+![preview](assets/2.gif)
+
+That's great. Now let's see what happens when we manually add a new `"Hello"`
+DIV element.
+
+__Continue to [step-3](./step-3).__
