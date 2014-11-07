@@ -4,6 +4,7 @@ function addHelloDiv(){
         div = document.createElement("div");
 
     div.innerHTML = "Hello";
+    div.className = "hello";
     td.appendChild(div);
     fooTr.appendChild(td);
 }

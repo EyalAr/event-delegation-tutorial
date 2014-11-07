@@ -1,28 +1,32 @@
 # Events Delegation Interactive Repo
 
-## Step 5 - Delegating events to the parent
+## Step 6 - Delegating events to the parent and filtering the target
 
-In this step we will have the first attempt with event delegation.
+We only want the `"Hello"` and `"World"` divs to beep on clicks, and not any other element inside `#foo` and `#bar`.
 
-We want to avoid the hassle of managing events for each element separately.
-One easy solution would be to just add the event to the parent element:
+Let's modify our event handlers to examine the target of the click event, and play the beep only for the desired target.
 
 ```Javascript
-var foo = document.getElementById("foo"),
-    bar = document.getElementById("bar");
+function helloOnClick(e){ 
+    if (e.target.matches("div#foo div.hello")){
+        beep();
+    }
+}
 
-foo.addEventListener('click', helloOnClick);
-foo.addEventListener('click', worldOnClick);
+function worldOnClick(e) {
+    if (e.target.matches("div#bar div.world")){
+        beep();
+        setTimeout(beep, 200);
+    }
+}
 ```
 
-Now every time we click inside one of the parent divs, `#foo` and `#bar`,
-we will hear beeps.
+`"div#foo div.hello"` tells our `helloOnClick` handler to beep only when the target is a DIV element with a `".hello"` class inside the `#foo` container. Similarly the `worldOnClick` handler will beep only when the target is a DIV element with a `".world"` class inside the `#bar` container.
 
-![preview](assets/5.gif)
+![preview](assets/6.gif)
 
-But this is not exactly what we want. We want only the `"Hello"` and `"World"`
-divs to respond to clicks, and not all the elements inside `#foo` and `#bar`.
+Although now we get what we want, this solution is not very scalable. What if we add other types of elements into our `#foo` and `#bar` containers with different events? Then we would have to check the target of the event for each of those types. Again, this is a lot of manual work.
 
-In the next step we will propose a naive way to make this distinction.
+In the next steps we will see how we can build a more generic event delegation solution.
 
-__Continue to [step-6](../../tree/step-6).__
+__Continue to [step-7](../../tree/step-7).__
