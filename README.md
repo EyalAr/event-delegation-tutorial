@@ -1,6 +1,6 @@
 # Events Delegation Interactive Repo
 
-## Step 7 - Delegating events to the parent and filtering the target
+## Step 7 - A Generic Event Delegation Solution
 
 A more scalable solution would allow us to delegate events to some parent element without us having to modify our handlers.
 
