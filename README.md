@@ -38,4 +38,4 @@ function worldOnClick(){
 That's great. Now let's see what happens when we manually add a new `"Hello"`
 DIV element.
 
-__Continue to [step-3](./step-3).__
+__Continue to [step-3](../../tree/step-3).__
