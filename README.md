@@ -5,8 +5,8 @@
 The first step in adding DOM events is finding the DOM elements we need:
 
 ```Javascript
-var helloDiv = document.querySelectorAll("div#foo div")[0],
-    worldDiv = document.querySelectorAll("div#bar div")[0];
+var helloDiv = document.getElementsByClassName("hello")[0],
+    worldDiv = document.getElementsByClassName("world")[0];
 ```
 
 Then adding the events is as simple as:
