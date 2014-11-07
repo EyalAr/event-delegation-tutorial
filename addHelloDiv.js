@@ -6,6 +6,4 @@ function addHelloDiv(){
     div.innerHTML = "Hello";
     td.appendChild(div);
     fooTr.appendChild(td);
-
-    div.addEventListener('click', helloOnClick);
 }

@@ -1,32 +1,28 @@
 # Events Delegation Interactive Repo
 
-## Step 4 - Manually Adding DOM Elements and Adding Events
+## Step 5 - Delegating events to the parent
 
-We modify the `addHelloDiv` function to also add a click event to the new
-DOM element:
+In this step we will have the first attempt with event delegation.
+
+We want to avoid the hassle of managing events for each element separately.
+One easy solution would be to just add the event to the parent element:
 
 ```Javascript
-function addHelloDiv(){
-    var fooTr = document.querySelectorAll("div#foo table tr")[0],
-        td = document.createElement("td"),
-        div = document.createElement("div");
+var foo = document.getElementById("foo"),
+    bar = document.getElementById("bar");
 
-    div.innerHTML = "Hello";
-    td.appendChild(div);
-    fooTr.appendChild(td);
-
-    div.addEventListener('click', helloOnClick);
-}
+foo.addEventListener('click', helloOnClick);
+foo.addEventListener('click', worldOnClick);
 ```
 
-![preview](assets/4.gif)
+Now every time we click inside one of the parent divs, `#foo` and `#bar`,
+we will hear beeps.
 
-And indeed, now clicking the new element works, as expected.
+![preview](assets/5.gif)
 
-We can stop here, and use this method of manually adding events to our elements. We need to remember to add an event every time we add a new element (as well as removing events when we remove elements, using `element.removeEventListener( ... )`).
+But this is not exactly what we want. We want only the `"Hello"` and `"World"`
+divs to respond to clicks, and not all the elements inside `#foo` and `#bar`.
 
-Managing events for each element in our page is a hassle. If we have thousands of elements, we need to add thousands of events, and manage their lifetime together with the lifetime of the elements.
+In the next step we will propose a naive way to make this distinction.
 
-In the next few steps we will see a different, easier, approach.
-
-__Continue to [step-5](./step-5).__
+__Continue to [step-6](./step-6).__

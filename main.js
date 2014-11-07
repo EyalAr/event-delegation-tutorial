@@ -1,16 +1,16 @@
 'use strict';
 
-var helloDiv = document.querySelectorAll("div#foo div")[0],
-    worldDiv = document.querySelectorAll("div#bar div")[0];
+var foo = document.getElementById("foo"),
+    bar = document.getElementById("bar");
 
-helloDiv.addEventListener('click', helloOnClick);
-worldDiv.addEventListener('click', worldOnClick);
+foo.addEventListener('click', helloOnClick);
+bar.addEventListener('click', worldOnClick);
 
-function helloOnClick(){ 
-    beep(); 
+function helloOnClick() {
+    beep();
 }
 
-function worldOnClick(){ 
+function worldOnClick() {
     beep();
     setTimeout(beep, 200);
 }
