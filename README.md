@@ -29,4 +29,6 @@ function initGlobalHandler(type){
 
 In the next step we will implement the `initGlobalHandler` function, which actually does the heavy lifting of handling delegated events.
 
+As we discussed, the global handler is the __only__ handler added to the parent element for some specific event. As we will see in the next step, the global handler will analyze every the target of event of its type and determine which of the handlers registered by the user should be called.
+
 __Continue to [step-11](../../tree/step-11).__
