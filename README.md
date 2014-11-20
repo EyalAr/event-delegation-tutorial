@@ -33,4 +33,4 @@ Each step contains a `README.md` file with explanations relevant for this step. 
 [Step-10](../../tree/step-10)  
 [Step-11](../../tree/step-11)  
 [Step-12](../../tree/step-12)  
-**[Summary](../../tree/sumary)**
+**[Summary](../../tree/summary)**
