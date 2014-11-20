@@ -20,7 +20,18 @@ MyQuery.prototype.on = function(type, selector, handler){
 };
 
 function initGlobalHandler(type){
-    /* ... */
+    var i, el;
+
+    for(i = 0; i < this.els.length; i++){
+        el = this.els[i];
+        el.addEventListener(type, gHandler(el));
+    }
+
+    // generate a global handler function
+    // for the root element 'el'.
+    function gHandler(root){
+        return function(e){ /* ... */ };
+    }
 }
 
 function $(selector){

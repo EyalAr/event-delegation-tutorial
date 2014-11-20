@@ -1,34 +1,31 @@
 # Events Delegation Interactive Repo
 
-## Step 10 - A Generic Event Delegation Framework
+## Step 11 - A Generic Event Delegation Framework
 
-Let's build the `on` method of our `MyQuery` object. This method delegates an event of a certain type to the `MyQuery` object; with a handler to be called when the event target matches a selector. It needs to do 2 simple things:
+The `initGlobalHandler` function is called only one time - on the first time we delegate an event of a certain type on our `MyQuery` object. This function needs initialize each of the DOM elements selected by our `MyQuery` object:
 
-0. Initialize a global handler on the parent element for the event type when it's called for the first time.
-0. Add an event handler to be called when the target matches the selector.
+0. Create a global events handling function for the element.
+0. Add an event listener for the element with the created function.
 
 ```Javascript
-MyQuery.prototype.on = function(type, selector, handler){
+function initGlobalHandler(type){
+    var i, el;
 
-    if (!this.eventHandlers[type]){
-        initGlobalHandler.call(this, type);
-        this.eventHandlers[type] = [];
+    for(i = 0; i < this.els.length; i++){
+        el = this.els[i];
+        el.addEventListener(type, gHandler(el));
     }
 
-    this.eventHandlers[type].push({
-        selector: selector,
-        handler: handler
-    });
-
-};
-
-function initGlobalHandler(type){
-    /* ... */
+    // generate a global handler function
+    // for the root element 'el'.
+    function gHandler(root){
+        return function(e){ /* ... */ };
+    }
 }
 ```
 
-In the next step we will implement the `initGlobalHandler` function, which actually does the heavy lifting of handling delegated events.
+Now, every time an event is triggered on one of the elements selected by our `MyQuery` object; the global handling function (which was created with `gHandler(el)`) will be called.
 
-As we discussed, the global handler is the __only__ handler added to the parent element for some specific event. As we will see in the next step, the global handler will analyze every the target of event of its type and determine which of the handlers registered by the user should be called.
+The last remaining step is to define how this function works.
 
-__Continue to [step-11](../../tree/step-11).__
+__Continue to [step-12](../../tree/step-12).__
