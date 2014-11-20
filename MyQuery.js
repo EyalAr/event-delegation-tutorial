@@ -29,8 +29,38 @@ function initGlobalHandler(type){
 
     // generate a global handler function
     // for the root element 'el'.
+    var self = this;
     function gHandler(root){
-        return function(e){ /* ... */ };
+
+        // return an event handling function
+        return function(event){
+
+            var target = event.target,
+                handlers = self.eventHandlers[type],
+                i, j, selector, handler, els;
+
+            for (i = 0; i < handlers.length; i++){
+
+                selector = handlers[i].selector;
+                handler = handlers[i].handler;
+
+                // get all the child elements which match the
+                // current selector
+                els = root.querySelectorAll(selector);
+
+                // check if one of them matches the target element
+                for (j = 0; j < els.length; j++){
+                    // if a match is found, call the respective handler
+                    if (els[j] === target){
+                        handler(event);
+                        break;
+                    }
+                }
+
+            }
+
+        };
+
     }
 }
 

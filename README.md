@@ -1,31 +1,67 @@
 # Events Delegation Interactive Repo
 
-## Step 11 - A Generic Event Delegation Framework
+## Step 12 - A Generic Event Delegation Framework
 
-The `initGlobalHandler` function is called only one time - on the first time we delegate an event of a certain type on our `MyQuery` object. This function needs initialize each of the DOM elements selected by our `MyQuery` object:
+We have reached the final step of this guide.
 
-0. Create a global events handling function for the element.
-0. Add an event listener for the element with the created function.
+All that is left is to implement a global event handling function for a root DOM element. This function is called every time an event is triggered on this element. It needs to:
+
+0. Examine the target of the event (on which of the child elements the event occured).
+0. Go through each of the selectors of delegated event handlers.
+0. If the selector matches the target element, call the respective handler.
 
 ```Javascript
-function initGlobalHandler(type){
-    var i, el;
+// ...
 
-    for(i = 0; i < this.els.length; i++){
-        el = this.els[i];
-        el.addEventListener(type, gHandler(el));
-    }
+// generate a global handler function
+// for the root element 'el'.
+var self = this;
+function gHandler(root){
 
-    // generate a global handler function
-    // for the root element 'el'.
-    function gHandler(root){
-        return function(e){ /* ... */ };
-    }
+    // return an event handling function
+    return function(event){
+
+        var target = event.target,
+            handlers = self.eventHandlers[type],
+            i, j, selector, handler, els;
+
+        for (i = 0; i < handlers.length; i++){
+
+            selector = handlers[i].selector;
+            handler = handlers[i].handler;
+
+            // get all the child elements which match the
+            // current selector
+            els = root.querySelectorAll(selector);
+
+            // check if one of them matches the target element
+            for (j = 0; j < els.length; j++){
+                // if a match is found, call the respective handler
+                if (els[j] === target){
+                    handler(event);
+                    break;
+                }
+            }
+
+        }
+
+    };
+
 }
 ```
 
-Now, every time an event is triggered on one of the elements selected by our `MyQuery` object; the global handling function (which was created with `gHandler(el)`) will be called.
+Now our framework is complete. Let's try to use it to delegate events:
 
-The last remaining step is to define how this function works.
+```Javascript
+var foo = $("#foo"),
+    bar = $("#bar");
 
-__Continue to [step-12](../../tree/step-12).__
+foo.on('click', 'div.hello', helloOnClick);
+bar.on('click', 'div.world', worldOnClick);
+```
+
+![preview](assets/12.gif)
+
+And it works.
+
+__Continue to [summary](../../tree/summary).__
